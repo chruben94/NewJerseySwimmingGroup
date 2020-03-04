@@ -4,11 +4,24 @@ import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import "./style.css";
+import axios from 'axios'
 
 class Detail extends Component {
-  state = {
-    appointment: {}
-  };
+  constructor(props) {
+    super(props);
+
+    this.onChangeDay = this.onChangeDay.bind(this);
+    this.onChangeTime = this.onChangeTime.bind(this);
+    this.onChangeLane = this.onChangeLane.bind(this);
+    this.onChangeStudent = this.onChangeStudent.bind(this);
+    this.onChangeStatus = this.onChangeStatus.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
+
+    this.state = {
+      appointment: {}
+    };
+  }
 
   componentDidMount() {
     API.getAppointment(this.props.match.params.id)
@@ -18,6 +31,54 @@ class Detail extends Component {
       }))
       .catch(err => console.log(err));
 
+  }
+  onChangeDay(e) {
+    this.setState({
+      Day: e.target.value
+    })
+  }
+
+  onChangeTime(e) {
+    this.setState({
+      Time: e.target.value
+    })
+  }
+
+  onChangeLane(e) {
+    this.setState({
+      Lane: e.target.value
+    })
+  }
+
+  onChangeStudent(e) {
+    this.setState({
+      Student: e.target.value
+    })
+  }
+
+  onChangeStatus(e) {
+    this.setState({
+      Status: e.target.value
+    })
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const appointment = {
+      Day: this.state.appointment.Day,
+      Time: this.state.appointment.Time,
+      Lane: this.state.appointment.Lane,
+      Student: this.state.appointment.Student,
+      Status: this.state.appointment.Status
+    }
+
+    console.log(appointment);
+
+    axios.post("/appointments/appointments/update" + this.porps.match.params.id, appointment)
+      .then(res => console.log(res.data));
+
+    window.location = "/appointments";
   }
 
   render() {
