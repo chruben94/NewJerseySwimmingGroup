@@ -105,7 +105,7 @@ class Appointments extends Component {
                 disabled={!(this.state.Day && this.state.Time)}
                 onClick={this.handleFormSubmit}
               >
-                Submit Book
+                Submit Appointment
               </FormBtn>
             </form>
 

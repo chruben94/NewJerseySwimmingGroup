@@ -9,8 +9,7 @@ class Detail extends Component {
   state = {
     appointment: {}
   };
-  // When this component mounts, grab the book with the _id of this.props.match.params.id
-  // e.g. localhost:3000/books/599dcb67f0f16317844583fc
+
   componentDidMount() {
     API.getAppointment(this.props.match.params.id)
       .then(res => this.setState({
@@ -35,33 +34,75 @@ class Detail extends Component {
         </Row>
         <Row>
           <Col size="md-10 md-offset-1">
-            <article>
-              <h1>Day:</h1>
-              <p>
-                {this.state.appointment.Day}
-              </p>
-              <h1>Time:</h1>
-              <p>
-                {this.state.appointment.Time}
-              </p>
-              <h1>Lane:</h1>
-              <p>
-                {this.state.appointment.Lane}
-              </p>
-              <h1>Student:</h1>
-              <p>
-                {this.state.appointment.Student}
-              </p>
-              <h1>Status:</h1>
-              <p>
-                {this.state.appointment.Status}
-              </p>
-            </article>
+
+            <form onSubmit={this.onSubtmit}>
+              <div className="form-group">
+                <label>Day:</label>
+                <input type="text"
+                  required
+                  className="form-control"
+                  value={this.state.appointment.Day}
+                  onChange={this.onChangeDay}
+                />
+              </div>
+
+
+              <div className="form-group">
+                <label>Time:</label>
+                <input type="text"
+                  required
+                  className="form-control"
+                  value={this.state.appointment.Time}
+                  onChange={this.onChangeTime}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Lane:</label>
+                <input type="text"
+                  required
+                  className="form-control"
+                  value={this.state.appointment.Lane}
+                  onChange={this.onChangeLane}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Student:</label>
+                <input type="text"
+                  required
+                  className="form-control"
+                  value={this.state.appointment.Student}
+                  onChange={this.onChangeStudent}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Status:</label>
+                <input type="text"
+                  required
+                  className="form-control"
+                  value={this.state.appointment.Status}
+                  onChange={this.onChangeStatus}
+                />
+              </div>
+
+              <div className="form-group">
+                <input type="submit" value="Edit Appointment" className="btn btn-primary" />
+              </div>
+
+
+
+
+
+
+
+            </form>
           </Col>
         </Row>
         <Row>
           <Col size="md-2">
-            <Link to="/">← Back to Appointments</Link>
+            <Link to="/appointments">← Back to Appointments</Link>
           </Col>
         </Row>
       </Container>
