@@ -1,0 +1,22 @@
+.schedule-container {
+    width: 90%;
+    text-align: center;
+    
+}
+
+ .card {
+     max-width: 600px;
+     max-height: 800px;
+ }
+
+ .pools-container {
+    width: 90%;
+    margin-left: 475px;
+
+}
+
+.carousel-item {
+    max-width: 100% !important;
+    max-height: 20% !important;
+}
+
