@@ -7,28 +7,31 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 import "./style.css";
+import fire from "./Fire";
+
 
 class Appointments extends Component {
-  state = {
-    appointments: [],
-    Day: "",
-    Time: "",
-    Lane: "",
-    Student: "",
-    Status: ""
+  constructor(props) {
+    super(props)
+    this.state = {
+      appointments: [],
+      Day: "",
+      Time: "",
+      Lane: "",
+      Student: "",
+      Status: ""
+    }
   };
 
   componentDidMount() {
     this.loadAppointments();
-
   }
 
   loadAppointments = () => {
     API.getAppointments()
-      .then(res => {
-        console.log(res.data)
+      .then(res =>
         this.setState({ appointments: res.data, Day: "", Time: "", Lane: "", Student: "", Status: "" })
-      })
+      )
       .catch(err => console.log(err));
   };
 
@@ -61,12 +64,17 @@ class Appointments extends Component {
     }
   };
 
+  logout() {
+    fire.auth().signOut();
+  }
+
   render() {
 
     const appointment = this.state.Day
     console.log(appointment)
     return (
       <Container fluid>
+        <button style={buttonStyle} onClick={this.logout}>Logout</button>
         <Row>
           <Col size="md-6">
             <Jumbotron>
@@ -134,10 +142,20 @@ class Appointments extends Component {
                 <h3>No Results to Display</h3>
               )}
           </Col>
+
         </Row>
+
       </Container>
     );
   }
+}
+
+const buttonStyle = {
+  color: 'black',
+  padding: '5px',
+  borderRadius: '10px',
+  background: 'lightblue',
+  float: 'right'
 }
 
 export default Appointments;
