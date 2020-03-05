@@ -77,9 +77,7 @@ class Appointments extends Component {
         <button style={buttonStyle} onClick={this.logout}>Logout</button>
         <Row>
           <Col size="md-6">
-            <Jumbotron>
-              <h1>Booked</h1>
-            </Jumbotron>
+            <h1>Create Appointment</h1>
             <form>
               <Input
                 value={this.state.Day}
@@ -115,16 +113,13 @@ class Appointments extends Component {
                 disabled={!(this.state.Day && this.state.Time)}
                 onClick={this.handleFormSubmit}
               >
-                Submit Book
+                Schedule
               </FormBtn>
             </form>
 
           </Col>
           <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Open</h1>
-            </Jumbotron>
-
+            <h1>Booked Appointments</h1>
             {this.state.appointments.length ? (
               <List>
                 {this.state.appointments.map(appointment => (

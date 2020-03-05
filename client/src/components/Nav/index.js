@@ -55,7 +55,7 @@ const AllNav = (props) => {
               </DropdownMenu>
             </UncontrolledDropdown> */}
           </Nav>
-          <NavbarText> <a href="#">Sign In</a></NavbarText>
+          {/* <NavbarText> <a href="#">Sign In</a></NavbarText> */}
         </Collapse>
       </Navbar>
     </div>
