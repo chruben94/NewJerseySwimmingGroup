@@ -20,13 +20,15 @@ class Appointments extends Component {
 
   componentDidMount() {
     this.loadAppointments();
+
   }
 
   loadAppointments = () => {
     API.getAppointments()
-      .then(res =>
+      .then(res => {
+        console.log(res.data)
         this.setState({ appointments: res.data, Day: "", Time: "", Lane: "", Student: "", Status: "" })
-      )
+      })
       .catch(err => console.log(err));
   };
 
