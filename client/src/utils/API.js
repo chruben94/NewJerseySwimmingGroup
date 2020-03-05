@@ -17,7 +17,7 @@ export default {
   saveAppointment: function (appointmentData) {
     return axios.post("/api/appointments", appointmentData);
   },
-  updateAppointment: function (appointmentData) {
-    return axios.put("/api/appointments", appointmentData)
+  updateAppointment: function (id) {
+    return axios.put("/api/appointments/" + id)
   }
 };

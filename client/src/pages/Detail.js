@@ -19,67 +19,105 @@ class Detail extends Component {
 
 
     this.state = {
-      appointment: {}
+      Day: "",
+      Time: "",
+      Lane: "",
+      Student: "",
+      Status: ""
     };
   }
 
   componentDidMount() {
     API.getAppointment(this.props.match.params.id)
-      .then(res => this.setState({
-        appointment
-          : res.data
-      }))
+      .then(res =>
+        this.setState({
+          Day: res.data.Day,
+          Time: res.data.Time,
+          Lane: res.data.Lane,
+          Student: res.data.Student,
+          Status: res.data.Status
+        }))
       .catch(err => console.log(err));
 
   }
   onChangeDay(e) {
     this.setState({
+      // appointment: {
       Day: e.target.value
+      // }
     })
   }
 
   onChangeTime(e) {
     this.setState({
+      // appointment: {
       Time: e.target.value
+      // }
     })
   }
 
   onChangeLane(e) {
     this.setState({
+      // appointment: {
       Lane: e.target.value
+      // }
     })
   }
 
   onChangeStudent(e) {
     this.setState({
+      // appointment: {
       Student: e.target.value
+      // }
     })
   }
 
   onChangeStatus(e) {
     this.setState({
+      // appointment: {
       Status: e.target.value
+      // }
     })
   }
 
   onSubmit(e) {
     e.preventDefault();
-
     const appointment = {
-      Day: this.state.appointment.Day,
-      Time: this.state.appointment.Time,
-      Lane: this.state.appointment.Lane,
-      Student: this.state.appointment.Student,
-      Status: this.state.appointment.Status
+      Day: this.state.Day,
+      Time: this.state.Time,
+      Lane: this.state.Lane,
+      Student: this.state.Student,
+      Status: this.state.Status
     }
 
     console.log(appointment);
+    API.updateAppointment({
+      Day: this.state.Day,
+      Time: this.state.Time,
+      Lane: this.state.Lane,
+      Student: this.state.Student,
+      Status: this.state.Status,
+    })
+      .then(res => this.loadAppointments())
+      .catch(err => console.log(err));
+  };
+  // e.preventDefault();
 
-    axios.post("/appointments/appointments/update" + this.porps.match.params.id, appointment)
-      .then(res => console.log(res.data));
+  // const appointment = {
+  //   Day: this.state.Day,
+  //   Time: this.state.Time,
+  //   Lane: this.state.Lane,
+  //   Student: this.state.Student,
+  //   Status: this.state.Status
+  // }
 
-    window.location = "/appointments";
-  }
+  // console.log(appointment);
+
+  // axios.post("/appointments/update/" + this.props.match.params.id, appointment)
+  //   .then(res => console.log(res.data));
+
+  // window.location = "/appointments/" + this.props.match.params.id;
+  // }
 
   render() {
     return (
@@ -96,13 +134,13 @@ class Detail extends Component {
         <Row>
           <Col size="md-10 md-offset-1">
 
-            <form onSubmit={this.onSubtmit}>
+            <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label>Day:</label>
                 <input type="text"
                   required
                   className="form-control"
-                  value={this.state.appointment.Day}
+                  value={this.state.Day}
                   onChange={this.onChangeDay}
                 />
               </div>
@@ -113,7 +151,7 @@ class Detail extends Component {
                 <input type="text"
                   required
                   className="form-control"
-                  value={this.state.appointment.Time}
+                  value={this.state.Time}
                   onChange={this.onChangeTime}
                 />
               </div>
@@ -123,7 +161,7 @@ class Detail extends Component {
                 <input type="text"
                   required
                   className="form-control"
-                  value={this.state.appointment.Lane}
+                  value={this.state.Lane}
                   onChange={this.onChangeLane}
                 />
               </div>
@@ -133,7 +171,7 @@ class Detail extends Component {
                 <input type="text"
                   required
                   className="form-control"
-                  value={this.state.appointment.Student}
+                  value={this.state.Student}
                   onChange={this.onChangeStudent}
                 />
               </div>
@@ -143,7 +181,7 @@ class Detail extends Component {
                 <input type="text"
                   required
                   className="form-control"
-                  value={this.state.appointment.Status}
+                  value={this.state.Status}
                   onChange={this.onChangeStatus}
                 />
               </div>
@@ -151,12 +189,6 @@ class Detail extends Component {
               <div className="form-group">
                 <input type="submit" value="Edit Appointment" className="btn btn-primary" />
               </div>
-
-
-
-
-
-
 
             </form>
           </Col>
