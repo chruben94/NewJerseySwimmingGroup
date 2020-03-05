@@ -1,17 +1,28 @@
 .schedule-container {
-    width: 90%;
-    text-align: center;
     
+    text-align: center;
+    /* background-color: rgb(32, 126, 155);
+     */
+}
+
+.instructors-container {
+background-color: rgb(32, 126, 155);
 }
 
  .card {
-     max-width: 600px;
+     max-width: 610px;
      max-height: 800px;
+ }
+ .card-deck {
+   padding-left: 25px;
+   padding-right: 25px;
+    
  }
 
  .pools-container {
-    width: 90%;
+    width: 100%;
     margin-left: 475px;
+    
 
 }
 
